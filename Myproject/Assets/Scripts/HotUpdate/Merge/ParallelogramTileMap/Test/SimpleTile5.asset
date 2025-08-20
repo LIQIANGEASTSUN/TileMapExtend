@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebddc0e0aa0345248a9096fee385a373, type: 3}
+  m_Name: SimpleTile5
+  m_EditorClassIdentifier: 
+  Sprite: {fileID: -565247845, guid: 7273edd44ea4b554bb8ba407f392d675, type: 3}

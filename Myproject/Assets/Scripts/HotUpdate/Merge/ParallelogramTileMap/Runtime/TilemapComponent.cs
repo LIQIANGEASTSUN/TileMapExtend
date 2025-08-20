@@ -9,7 +9,6 @@ namespace Merge.TileMap
     public partial class TilemapComponent : MonoBehaviour
     {
         [Header("Grid Settings")] 
-        public Vector3 origin = Vector3.zero;
         public Vector3 axisRow = new Vector3(0.965f, 0.282f, 0);
         public Vector3 axisCol = new Vector3(-0.484f, 0.593f, 0);
         
@@ -22,7 +21,7 @@ namespace Merge.TileMap
         void Awake()
         {
             grid = new ParallelogramGrid();
-            grid.Initialize(origin, axisRow, axisCol);
+            grid.Initialize(transform.position, axisRow, axisCol);
             renderer = GetComponent<TilemapRenderer>();
         }
 
@@ -49,22 +48,6 @@ namespace Merge.TileMap
                         Debug.Log($"Clicked empty cell: {cellPos}");
                     }
                 }
-
-                // var cam = Camera.main;
-                // var ray = cam.ScreenPointToRay(Input.mousePosition);
-                // if (Physics.Raycast(ray, out RaycastHit hit))
-                // {
-                //     var cellPos = grid.WorldToCell(hit.point);
-                //
-                //     if (grid.TryGetCell(cellPos,out var cell))
-                //     {
-                //         Debug.Log($"Clicked cell with tile: {cellPos}");
-                //     }
-                //     else
-                //     {
-                //         Debug.Log($"Clicked empty cell: {cellPos}");
-                //     }
-                // }
             }
         }
 

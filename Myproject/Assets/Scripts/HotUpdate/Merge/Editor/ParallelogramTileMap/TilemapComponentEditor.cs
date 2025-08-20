@@ -95,7 +95,7 @@ namespace Merge.TileMap
             if (e.type == EventType.MouseDown && e.button == 0)
             {
                 var ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
-                var plane = new Plane(Vector3.forward, new Vector3(0, 0, comp.origin.z));
+                var plane = new Plane(Vector3.forward, new Vector3(0, 0, comp.transform.position.z));
                 if (!plane.Raycast(ray, out float enter)) return;
 
                 var worldPos = ray.GetPoint(enter);
@@ -132,7 +132,7 @@ namespace Merge.TileMap
 
         private void StartEdit()
         {
-            grid.Initialize(comp.origin, comp.axisRow, comp.axisCol);
+            grid.Initialize(comp.transform.position, comp.axisRow, comp.axisCol);
             foreach (var c in comp.GetSerializedCells())
                 grid.SetTile(c);
             brushIndex = comp.tileAssets.Length > 0 ? 0 : -1;

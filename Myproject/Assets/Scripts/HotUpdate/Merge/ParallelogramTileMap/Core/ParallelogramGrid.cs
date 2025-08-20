@@ -9,6 +9,7 @@ namespace Merge.TileMap
         private Vector3 _origin;
         private Vector3 _axisRow;
         private Vector3 _axisCol;
+        private Matrix4x4 _gridToWorld;
         private Matrix4x4 _worldToGrid;
 
         public void Initialize(Vector3 origin, Vector3 axisRow, Vector3 axisCol)
@@ -17,12 +18,13 @@ namespace Merge.TileMap
             _axisRow = axisRow;
             _axisCol = axisCol;
 
-            var m =  new Matrix4x4();
-            m.SetColumn(0, new Vector4(axisCol.x, axisCol.y, axisCol.z, 0));
-            m.SetColumn(1, new Vector4(axisRow.x, axisRow.y, axisRow.z, 0));
-            m.SetColumn(2, new Vector4(0, 0, 1, 0));
-            m.SetColumn(3, new Vector4(origin.x, origin.y, origin.z, 1));
-            _worldToGrid = m.inverse;
+            _gridToWorld =  new Matrix4x4();
+            _gridToWorld.SetColumn(0, new Vector4(axisCol.x, axisCol.y, axisCol.z, 0));
+            _gridToWorld.SetColumn(1, new Vector4(axisRow.x, axisRow.y, axisRow.z, 0));
+            Vector3 axisNormal = Vector3.Cross(axisCol, axisRow).normalized;
+            _gridToWorld.SetColumn(2, new Vector4(axisNormal.x, axisNormal.y, axisNormal.z, 0));
+            _gridToWorld.SetColumn(3, new Vector4(origin.x, origin.y, origin.z, 1));
+            _worldToGrid = _gridToWorld.inverse;
             _cells.Clear();
         }
 
@@ -55,6 +57,7 @@ namespace Merge.TileMap
 
         public Vector3 CellToWorld(Vector3Int cell)
         {
+            Vector3 worldPos = _gridToWorld.MultiplyPoint3x4(new Vector3(cell.x, cell.y, 0));
             return _origin + _axisRow * cell.x + _axisCol * cell.y;
         }
 

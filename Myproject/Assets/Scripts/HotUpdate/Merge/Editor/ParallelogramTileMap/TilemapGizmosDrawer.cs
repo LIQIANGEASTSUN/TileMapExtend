@@ -31,7 +31,7 @@ namespace Merge.TileMap
             
             Camera cam = Camera.current;
             if (cam == null) return;
-            Plane gridPlane = new Plane(Vector3.forward, new Vector3(0, 0, comp.origin.z));
+            Plane gridPlane = new Plane(Vector3.forward, new Vector3(0, 0, comp.transform.position.z));
             Vector3[] worldCorners = new Vector3[4];
             Vector2[] vp = { Vector2.zero, Vector2.right, Vector2.one, Vector2.up };
             for (int i = 0; i < 4; i++)
@@ -67,7 +67,7 @@ namespace Merge.TileMap
             corners[2] = row + col;
             corners[3] = -row + col;
             
-            Vector3 originCorner = comp.origin + corners[0];
+            Vector3 originCorner = comp.transform.position + corners[0];
             for (int c = colMin; c <= colMax; c++)
             {
                 Handles.color = (c % majorLineInterval == 0) ? majorLineColor : minorLineColor;
